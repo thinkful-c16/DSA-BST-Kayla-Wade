@@ -51,6 +51,13 @@ const findHeight = tree => {
 //== BST VALIDATION ==//
 
 const isBST = tree => {
+
+  if (!tree) {
+    return undefined;
+  }
+  if (tree.key && !(tree.left) && !(tree.right)) {
+    return 'With only one item in tree, this is a valid binary search tree';
+  }
   if (tree.parent === null) {
     return evaluateChildren(tree);
   } 
@@ -73,12 +80,10 @@ const isBST = tree => {
       evaluateChildren(tree.left);
     }
     else {
-      return 'With only one item in tree, this is a valid binary search tree';
+      return;
     }
     return 'This is a valid Binary Search Tree';
   } 
-
-
 };
 
 
@@ -100,6 +105,7 @@ function main() {
   BST.insert(0);
   BST.insert(3);
   trashBinary.insert(10);
+  trashBinary.insert(11);
 
   // console.dir(BST, {depth: null, colors:true});
   console.log(trashBinary);
@@ -108,4 +114,11 @@ function main() {
 main();
 // console.log(findHeight(BST));
 
-console.log(isBST(BST));
+console.log(isBST(trashBinary));
+
+// Best case run time complexity for this algorithm would be O(1) where the tree only contains one key, thus having a height of 1;
+// 
+// Average case time complexity for this algorithm should be O(log(n))?
+// 
+// Worst case time complexity for this algorithm should be O(n) where our traverse function is called recursively for every
+// descendant node of the root in order to locate and run our findDistanceToRoot fn on all nodes who do not have children
