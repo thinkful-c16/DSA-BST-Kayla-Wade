@@ -32,4 +32,19 @@ class BinarySearchTree {
       }
     }
   }
+
+  find(key) {
+    if (key === this.key) {
+      return this.value;
+    }
+    else if (key < this.key && this.left) {
+      return this.left.find(key);
+    }
+    else if (key > this.key && this.right) {
+      return this.right.find(key);
+    }
+    else {
+      throw new Error('key not found in tree');
+    }
+  }
 }
