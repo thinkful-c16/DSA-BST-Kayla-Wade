@@ -1,8 +1,10 @@
 'use strict';
 
 const BinarySearchTree = require('./bst');
+const mixBinary = require('./scratch');
 
 let BST = new BinarySearchTree();
+let trashBinary = new mixBinary();
 
 //== Height of BST ==//
 
@@ -46,6 +48,39 @@ const findHeight = tree => {
 
 };
 
+//== BST VALIDATION ==//
+
+const isBST = tree => {
+  if (tree.parent === null) {
+    return evaluateChildren(tree);
+  } 
+
+  function evaluateChildren(tree) {
+    if ((tree.left) && !(tree.left.key < tree.key)) {
+      return 'Not a valid Binary Search Tree';
+    }
+    if ((tree.right) && !(tree.right.key > tree.key)) {
+      return 'Not a valid Binary Search Tree';
+    }
+    else if (tree.right && tree.left) {
+      evaluateChildren(tree.right);
+      evaluateChildren(tree.left);
+    }
+    else if (tree.right) {
+      evaluateChildren(tree.right);
+    }
+    else if (tree.left) {
+      evaluateChildren(tree.left);
+    }
+    else {
+      return 'With only one item in tree, this is a valid binary search tree';
+    }
+    return 'This is a valid Binary Search Tree';
+  } 
+
+
+};
+
 
 function main() {
   BST.insert(7);
@@ -64,8 +99,13 @@ function main() {
   BST.insert(1);
   BST.insert(0);
   BST.insert(3);
-  console.dir(BST, {depth: null, colors:true});
+  trashBinary.insert(10);
+
+  // console.dir(BST, {depth: null, colors:true});
+  console.log(trashBinary);
 }
 
 main();
-console.log(findHeight(BST));
+// console.log(findHeight(BST));
+
+console.log(isBST(BST));
