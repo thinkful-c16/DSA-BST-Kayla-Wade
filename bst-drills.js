@@ -2,26 +2,30 @@
 
 const BinarySearchTree = require('./bst');
 
-let bst = new BinarySearchTree();
+let BST = new BinarySearchTree();
 
 //== Height of BST ==//
 
 const findHeight = tree => {
   let height = 0;
+  let count = 0;
   //max node is number of nodes * 2; 
   function findDistanceToRoot(node) {
-    let count = 0;
-    if (node.parent) {
+    let count = 1;
+    while (node.parent) {
       count++;
-      findDistanceToRoot(node.parent);
+      node = node.parent;
     }
-    else {
-      if (count > height) {
-        height = count;
-      }
+    if (count > height) {
+      height = count;
     }
+    return;
   }
+
   function traverse(tree) {
+    if(tree.key === null) {
+      return 'This tree is empty';
+    }
     if (tree.left && tree.right) {
       traverse(tree.left);
       traverse(tree.right);
@@ -35,13 +39,33 @@ const findHeight = tree => {
     else {
       findDistanceToRoot(tree);
     }
-    return height;
+    return `The height of this tree is ${height}`;
   }
   
-  traverse(tree);
-
-
+  return traverse(tree);
 
 };
 
-console.log(findHeight(bst));
+
+function main() {
+  BST.insert(7);
+  BST.insert(5);
+  BST.insert(10);
+  BST.insert(6);
+  BST.insert(4);
+  BST.insert(13);
+  BST.insert(9);
+  BST.insert(14);
+  BST.insert(15);
+  BST.insert(20);
+  BST.insert(18);
+  BST.insert(19);
+  BST.insert(2);
+  BST.insert(1);
+  BST.insert(0);
+  BST.insert(3);
+  console.dir(BST, {depth: null, colors:true});
+}
+
+main();
+console.log(findHeight(BST));
