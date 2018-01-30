@@ -128,4 +128,4 @@ function main() {
 
 main();
 
-module.exports = BinarySearchTree;;
+module.exports = BinarySearchTree;

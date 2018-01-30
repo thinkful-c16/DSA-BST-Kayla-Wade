@@ -10,7 +10,6 @@ let trashBinary = new mixBinary();
 
 const findHeight = tree => {
   let height = 0;
-  let count = 0;
   //max node is number of nodes * 2; 
   function findDistanceToRoot(node) {
     let count = 1;
@@ -47,6 +46,13 @@ const findHeight = tree => {
   return traverse(tree);
 
 };
+
+// Best case run time complexity for this algorithm would be O(1) where the tree only contains one key, thus having a height of 1;
+// 
+// Average case time complexity for this algorithm should be O(log(n))?
+// 
+// Worst case time complexity for this algorithm should be O(n) where our traverse function is called recursively for every
+// descendant node of the root in order to locate and run our findDistanceToRoot fn on all nodes who do not have children
 
 //== BST VALIDATION ==//
 
@@ -105,20 +111,12 @@ function main() {
   BST.insert(0);
   BST.insert(3);
   trashBinary.insert(10);
-  trashBinary.insert(11);
 
   // console.dir(BST, {depth: null, colors:true});
-  console.log(trashBinary);
+  console.log(BST);
 }
 
 main();
 // console.log(findHeight(BST));
 
 console.log(isBST(trashBinary));
-
-// Best case run time complexity for this algorithm would be O(1) where the tree only contains one key, thus having a height of 1;
-// 
-// Average case time complexity for this algorithm should be O(log(n))?
-// 
-// Worst case time complexity for this algorithm should be O(n) where our traverse function is called recursively for every
-// descendant node of the root in order to locate and run our findDistanceToRoot fn on all nodes who do not have children
